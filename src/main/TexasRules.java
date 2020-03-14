@@ -102,7 +102,7 @@ public class TexasRules {
         return newCards;
     }
 
-    //从大到小排序
+    //卡牌从大到小排序
     public static void sortCards(List<Card> cards) {
         if (cards != null) {
             cards.sort((c1, c2) -> {
