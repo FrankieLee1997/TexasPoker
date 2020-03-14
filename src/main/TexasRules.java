@@ -105,20 +105,14 @@ public class TexasRules {
     //从大到小排序
     public static void sortCards(List<Card> cards) {
         if (cards != null) {
-            cards.sort(new Comparator<Card>() {
-                public int compare(Card o1, Card o2) {
-                    return -o1.getNum().compareTo(o2.getNum());
-                }
+            cards.sort((c1, c2) -> {
+                // TODO Auto-generated method stub
+                return -c1.getNum().compareTo(c2.getNum());
             });
         }
     }
 
-    /**
-     * 是否是同花顺,不是返回0,是就返回分数(最大值*14的12次方)
-     *
-     * @param cards
-     * @return
-     */
+    //同花顺
     public static long isStraightFlush(List<Card> cards) {
         char suit = cards.get(0).getSuit();
         int num = cards.get(0).getNum();
@@ -135,12 +129,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为铁支,不是返回0,是就返回分数(相同牌的点数*14的11次方)
-     *
-     * @param cards
-     * @return
-     */
+    //铁支
     public static long isFourOfaKind(List<Card> cards) {
         if (cards.get(1).getNum() == cards.get(2).getNum() && cards.get(1).getNum() == cards.get(3).getNum()) {
             if (cards.get(0).getNum() == cards.get(1).getNum() || cards.get(4).getNum() == cards.get(1).getNum()) {
@@ -150,12 +139,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为葫芦,不是返回0,是就返回分数(三张相同牌的点数*14的10次方)
-     *
-     * @param cards
-     * @return
-     */
+    //葫芦
     public static long isFullHouse(List<Card> cards) {
         if (cards.get(0).getNum() == cards.get(1).getNum()) {
             if (cards.get(1).getNum() == cards.get(2).getNum()) {
@@ -171,12 +155,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为同花,不是返回0,是就返回分数(最大牌*14的9次方+第二*14的8次方+第三*14的7次方+第四*14的6次方+第五*14的5次方)
-     *
-     * @param cards
-     * @return
-     */
+    //同花
     public static long isFlush(List<Card> cards) {
         char type = cards.get(0).getSuit();
         int flag = 1;
@@ -195,12 +174,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为顺子,不是就返回0,是就返回分数(最大牌*14的8次方)
-     *
-     * @param cards
-     * @return
-     */
+    //顺子
     public static long isStraight(List<Card> cards) {
         int num = cards.get(0).getNum();
         int flag = 1;
@@ -216,12 +190,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为三条,不是就返回0,是就返回分数(三张相同的牌*14的7次方)
-     *
-     * @param cards
-     * @return
-     */
+    //三条
     public static long isThreeOfaKind(List<Card> cards) {
         if (cards.get(0).getNum() == cards.get(1).getNum() && cards.get(2).getNum() == cards.get(1).getNum()) {
             return cards.get(0).getNum() * (long) Math.pow(14, 7);
@@ -235,12 +204,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为两对,不是返回0,是就返回分数(大对*14的6次方+小对*14的5次方)
-     *
-     * @param cards
-     * @return
-     */
+    //两对
     public static long isTwoPairs(List<Card> cards) {
         if (cards.get(0).getNum() == cards.get(1).getNum() && cards.get(3).getNum() == cards.get(4).getNum()) {
             return cards.get(0).getNum() * (long) Math.pow(14, 6) + cards.get(3).getNum() * (long) Math.pow(14, 5);
@@ -254,12 +218,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 是否为对子,不是就返回0,是就返回分数(对子*14的5次方)
-     *
-     * @param cards
-     * @return
-     */
+    //对子
     public static long isPair(List<Card> cards) {
         for (int i = 0; i < cards.size() - 1; i++) {
             int number = cards.get(i).getNum();
@@ -272,12 +231,7 @@ public class TexasRules {
         return 0;
     }
 
-    /**
-     * 若为散牌,则返回分数,(最大牌*14的4次方+第二*14的3次方+第三*14的2次方+第四*14的1次方+第五*14的0次方)
-     *
-     * @param cards
-     * @return
-     */
+    //散牌
     public static long isHighCard(List<Card> cards) {
         return cards.get(0).getNum() * (long) Math.pow(14, 4) +
                 cards.get(1).getNum() * (long) Math.pow(14, 3) +
